@@ -1,0 +1,453 @@
+/* ========================================
+   OSU Energy Dashboard — Grid Layout CSS
+   ======================================== */
+
+/* Root container */
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem 2rem;
+  width: 100%;
+}
+
+/* Header — compact */
+.dash-header {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+.dash-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #bb0000;
+  margin: 0;
+}
+.dash-header p {
+  color: #666;
+  font-size: 0.85rem;
+  max-width: 700px;
+  margin: 0.4rem auto 0;
+  line-height: 1.4;
+}
+
+/* Sticky nav */
+.dash-nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.6rem 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+.dash-nav a {
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+  background: #f3f4f6;
+  transition: all 0.15s;
+}
+.dash-nav a:hover {
+  background: #bb0000;
+  color: white;
+}
+
+/* Section headings */
+.section-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #bb0000;
+  margin: 1.25rem 0 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid #bb0000;
+  scroll-margin-top: 3rem;
+}
+
+/* ─── Grid system ─── */
+.grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.g1 { grid-template-columns: 1fr; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* ─── Card ─── */
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* prevent overflow */
+}
+.card-full {
+  grid-column: 1 / -1;
+}
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 0.4rem;
+}
+.card-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+.card-insight {
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+/* Chart loading spinner */
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+/* ─── Chart sub-grids ─── */
+.chart-grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.mini-chart h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: #374151;
+}
+
+/* Efficiency side-by-side */
+.efficiency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.efficiency-grid h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+.total-analyzed {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+/* ─── Heatmap ─── */
+.heatmap-container { overflow-x: auto; }
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 40px repeat(24, 1fr);
+  gap: 2px;
+  min-width: 500px;
+}
+.heatmap-corner { min-height: 1px; }
+.heatmap-hour-label {
+  text-align: center;
+  font-size: 0.6rem;
+  color: #6b7280;
+  padding: 2px 0;
+}
+.heatmap-day-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+}
+.heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  min-height: 24px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.heatmap-cell:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+.heatmap-gradient {
+  width: 120px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(to right, rgb(0,0,255), rgb(255,200,0), rgb(255,0,0));
+}
+
+/* ─── Campus stats table ─── */
+.campus-stats { margin-top: 0.75rem; }
+.campus-stats h4 {
+  font-size: 0.82rem;
+  margin: 0 0 0.4rem;
+  color: #374151;
+}
+.campus-stats table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+.campus-stats th,
+.campus-stats td {
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+.campus-stats th {
+  font-weight: 600;
+  color: #374151;
+  background: #f9fafb;
+}
+
+/* ─── EUI stats ─── */
+.eui-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  background: #f9fafb;
+  border-radius: 6px;
+  min-width: 80px;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* ─── Interactive filters ─── */
+.chart-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.chart-filters label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  margin-right: 0.2rem;
+}
+.filter-btn {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  background: #f9fafb;
+  font-size: 0.72rem;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.12s;
+}
+.filter-btn:hover { background: #e5e7eb; }
+.filter-btn.active {
+  background: #bb0000;
+  color: white;
+  border-color: #bb0000;
+}
+.filter-input {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  outline: none;
+  min-width: 150px;
+}
+.filter-input:focus {
+  border-color: #bb0000;
+  box-shadow: 0 0 0 2px rgba(187,0,0,0.1);
+}
+
+/* ─── Findings / Recommendations ─── */
+.findings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.finding-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+.finding-card h3 {
+  font-size: 0.85rem;
+  margin: 0 0 0.35rem;
+  color: #111;
+}
+.finding-card p {
+  font-size: 0.78rem;
+  color: #4b5563;
+  line-height: 1.45;
+  margin: 0;
+}
+.finding-card.finding-highlight {
+  border-left: 3px solid #bb0000;
+  background: #fef8f8;
+}
+
+/* ─── Narrative / Analysis sections ─── */
+.narrative-section {
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 0;
+}
+.narrative-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.narrative-text {
+  font-size: 0.82rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+  max-width: 900px;
+}
+.narrative-text strong {
+  color: #111;
+}
+.narrative-text em {
+  color: #bb0000;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ─── Coverage table ─── */
+.coverage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.coverage-table th {
+  background: #bb0000;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.coverage-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  vertical-align: top;
+}
+.coverage-table tr:nth-child(even) td {
+  background: #f9fafb;
+}
+.coverage-table td em {
+  color: #bb0000;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ─── Summary callout ─── */
+.summary-section {
+  background: linear-gradient(135deg, #fef2f2, #fff7ed);
+  border: 2px solid #bb0000;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+.summary-section .narrative-heading {
+  color: #bb0000;
+  border-bottom-color: #bb0000;
+}
+.summary-section .narrative-text {
+  font-size: 0.85rem;
+  max-width: none;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .g3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .dashboard { padding: 0.5rem 0.75rem; }
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .chart-grid-2x2 { grid-template-columns: 1fr; }
+  .efficiency-grid { grid-template-columns: 1fr; }
+  .findings-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Dark Mode ─── */
+@media (prefers-color-scheme: dark) {
+  .dash-header h1 { color: #ef4444; }
+  .dash-nav { background: #1a1a1a; border-color: #333; }
+  .dash-nav a { background: #2a2a2a; color: #ccc; }
+  .section-heading { color: #ef4444; border-color: #ef4444; }
+  .card { background: #1e1e1e; border-color: #333; }
+  .card-title { color: #eee; }
+  .card-insight { color: #fbbf24; background: #292524; border-color: #78350f; }
+  .campus-stats th { background: #2a2a2a; color: #ccc; }
+  .campus-stats td { border-color: #333; }
+  .stat { background: #2a2a2a; }
+  .stat-value { color: #eee; }
+  .filter-btn { background: #2a2a2a; color: #ccc; border-color: #444; }
+  .filter-btn:hover { background: #333; }
+  .filter-input { background: #2a2a2a; color: #ccc; border-color: #444; }
+  .chart-filters label { color: #ccc; }
+  .finding-card { background: #2a2a2a; border-color: #444; }
+  .finding-card h3 { color: #eee; }
+  .finding-card p { color: #aaa; }
+  .finding-card.finding-highlight { background: #2a1515; border-left-color: #ef4444; }
+  .narrative-heading { color: #eee; border-bottom-color: #444; }
+  .narrative-text { color: #bbb; }
+  .narrative-text strong { color: #eee; }
+  .narrative-text em { color: #ef4444; }
+  .coverage-table th { background: #991b1b; }
+  .coverage-table td { color: #bbb; border-bottom-color: #333; }
+  .coverage-table tr:nth-child(even) td { background: #2a2a2a; }
+  .coverage-table td em { color: #ef4444; }
+  .summary-section { background: linear-gradient(135deg, #1a1010, #1a1510); border-color: #ef4444; }
+  .summary-section .narrative-heading { color: #ef4444; border-bottom-color: #ef4444; }
+  .summary-section .narrative-text { color: #bbb; }
+}

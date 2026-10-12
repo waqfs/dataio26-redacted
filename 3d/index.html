@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSU Energy — 3D Campus Explorer</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Three.js canvas fills this -->
+    <canvas id="scene"></canvas>
+
+    <!-- Side Panel (Primary - left click) -->
+    <div id="panel" class="panel">
+      <button id="panel-toggle" class="panel-toggle" aria-label="Toggle panel">◀</button>
+      <div class="panel-content" id="panel-content">
+        <div class="panel-header">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23bb0000'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3C/svg%3E" width="20" height="20" alt="" />
+          <h1>OSU Energy Explorer</h1>
+        </div>
+        <div id="panel-body">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Panel (Secondary - right click) -->
+    <div id="compare-panel" class="panel compare-panel" style="display:none;">
+      <div class="panel-content" id="compare-panel-content">
+        <div class="panel-header compare-header">
+          <h1>Comparison</h1>
+          <button id="compare-close" class="compare-close-btn">✕</button>
+        </div>
+        <div id="compare-panel-body">
+          <!-- Populated by JS on right-click -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- Instructions overlay -->
+    <div id="instructions" class="instructions">
+      <p>🖱️ Drag to rotate · Scroll to zoom · Click a campus to explore</p>
+    </div>
+
+    <!-- EUI Color Legend -->
+    <div id="eui-legend" class="eui-legend" style="display:none;">
+      <div class="legend-title">Energy Use Intensity (EUI)</div>
+      <div class="legend-items">
+        <div class="legend-item"><span class="legend-swatch" style="background:#22c55e;"></span><span>&lt; 100 kBtu/ft²</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#eab308;"></span><span>100 – 300</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#f97316;"></span><span>300 – 600</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#ef4444;"></span><span>600 – 1,200</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#7f1d1d;"></span><span>&gt; 1,200</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#6b7280;"></span><span>No Data</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

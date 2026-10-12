@@ -1,0 +1,6 @@
+.github
+.vscode
+.DS_Store
+dataset/*
+exploration/outputs/*
+beatrice.md

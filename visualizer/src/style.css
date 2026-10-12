@@ -1,0 +1,79 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color: #222;
+	background-color: #ffffff;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #bb0000;
+	padding: 0 1.5rem;
+}
+
+header .logo {
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.1rem;
+	letter-spacing: 0.5px;
+}
+
+header nav {
+	display: flex;
+}
+
+header a {
+	color: #fff;
+	padding: 0.75rem;
+	text-decoration: none;
+	font-size: 0.85rem;
+}
+
+header a.active {
+	background-color: #0005;
+}
+
+header a:hover {
+	background-color: #0008;
+}
+
+main {
+	flex: auto;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media (max-width: 639px) {
+	main {
+		margin: 0;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color: #ccc;
+		background-color: #1a1a1a;
+	}
+}

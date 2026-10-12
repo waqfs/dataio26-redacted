@@ -1,0 +1,496 @@
+/* ================================================
+   OSU 3D Energy Explorer — Global Styles
+   ================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0a0a0f;
+  color: #e0e0e0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#scene {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ─── Side Panel ─── */
+.panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 570px;
+  display: flex;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.panel.collapsed {
+  transform: translateX(570px);
+}
+
+/* Comparison Panel (appears to the left of main panel) */
+.compare-panel {
+  right: 570px !important;
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+.compare-panel .panel-content {
+  border-radius: 0;
+}
+.compare-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.compare-close-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #aaa;
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.compare-close-btn:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.panel-toggle {
+  position: absolute;
+  left: -36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 80px;
+  border: none;
+  background: rgba(20, 20, 30, 0.92);
+  color: #ccc;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 8px 0 0 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-right: none;
+  transition: all 0.2s;
+}
+.panel-toggle:hover {
+  background: rgba(187, 0, 0, 0.8);
+  color: white;
+}
+.panel.collapsed .panel-toggle {
+  left: -36px;
+}
+
+.panel-content {
+  flex: 1;
+  background: rgba(14, 14, 22, 0.94);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 1rem;
+}
+.panel-header h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+/* Panel sections */
+.panel-section {
+  margin-bottom: 1.25rem;
+}
+.panel-section h2 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #bb0000;
+  margin-bottom: 0.5rem;
+}
+.panel-section h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+/* Stat cards */
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+}
+.stat-card .label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+}
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.15rem;
+}
+.stat-card .value.red { color: #ef4444; }
+.stat-card .value.green { color: #22c55e; }
+.stat-card .value.blue { color: #3b82f6; }
+.stat-card .value.amber { color: #f59e0b; }
+
+.stat-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Mini bar chart in panel */
+.mini-bars {
+  margin-top: 0.3rem;
+}
+.mini-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+.mini-bar-label {
+  font-size: 0.72rem;
+  color: #aaa;
+  width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+.mini-bar-track {
+  flex: 1;
+  height: 14px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.mini-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.mini-bar-value {
+  font-size: 0.68rem;
+  color: #888;
+  width: 55px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Prediction section */
+.prediction-card {
+  background: rgba(187, 0, 0, 0.08);
+  border: 1px solid rgba(187, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+.prediction-card .pred-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin-bottom: 0.25rem;
+}
+.prediction-card .pred-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+.prediction-card .pred-detail {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+
+/* Finding pills */
+.finding-pill {
+  display: inline-block;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #bbb;
+  margin-bottom: 0.35rem;
+  margin-right: 0.25rem;
+}
+
+/* Back button when viewing campus */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(187, 0, 0, 0.15);
+  border: 1px solid rgba(187, 0, 0, 0.3);
+  color: #ef4444;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: all 0.15s;
+}
+.back-btn:hover {
+  background: rgba(187, 0, 0, 0.3);
+}
+
+/* ─── Tooltip ─── */
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(10, 10, 20, 0.92);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: none;
+  z-index: 30;
+  max-width: 260px;
+  line-height: 1.4;
+}
+.tooltip.visible {
+  display: block;
+}
+
+/* ─── Instructions ─── */
+.instructions {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 20, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  z-index: 10;
+  transition: opacity 0.5s;
+}
+.instructions p {
+  font-size: 0.78rem;
+  color: #999;
+}
+.instructions.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── EUI Color Legend ─── */
+.eui-legend {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 15;
+  min-width: 160px;
+}
+.legend-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: #aaa;
+}
+.legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ─── Scrollbar ─── */
+.panel-content::-webkit-scrollbar {
+  width: 4px;
+}
+.panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+/* Mini canvas for charts in panel */
+.panel-chart {
+  width: 100%;
+  height: 140px;
+  margin-top: 0.3rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+}
+
+/* EUI Gauge */
+.eui-gauge {
+  margin-top: 0.5rem;
+}
+.gauge-track {
+  position: relative;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: visible;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s;
+}
+.gauge-marker {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 14px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 1px;
+}
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.58rem;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* Mini Chart for monthly projections */
+.mini-chart-container {
+  margin-top: 0.5rem;
+}
+.mini-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 70px;
+  padding: 0 2px;
+}
+.mini-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 1px;
+  position: relative;
+}
+.mini-bar-group .mini-bar-label {
+  font-size: 0.5rem;
+  color: #666;
+  position: absolute;
+  bottom: -14px;
+}
+.mini-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  min-height: 1px;
+}
+.mini-bar.actual {
+  background: rgba(59, 130, 246, 0.7);
+  position: absolute;
+  bottom: 0;
+  width: 45%;
+  left: 5%;
+}
+.mini-bar.trend {
+  background: rgba(249, 115, 22, 0.7);
+  position: absolute;
+  bottom: 0;
+  width: 45%;
+  right: 5%;
+}
+.mini-chart-legend {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 0.6rem;
+  color: #999;
+  margin-top: 1.2rem;
+  justify-content: center;
+}
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+.legend-dot.actual { background: rgba(59, 130, 246, 0.7); }
+.legend-dot.trend { background: rgba(249, 115, 22, 0.7); }
+
+/* Number Line Comparison */
+.number-line-container {
+  margin-bottom: 0.5rem;
+}
+.number-line-label {
+  font-size: 0.65rem;
+  color: #aaa;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.comparison-info {
+  font-size: 0.6rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
